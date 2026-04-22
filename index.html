@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pulse</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Pulse</h1>
+            <div class="points-display">
+                <span class="points-label">Твои очки:</span>
+                <span class="points-value" id="points">0</span>
+            </div>
+            <div id="syncStatus" class="sync-status"></div>
+        </div>
+
+        <div class="nav">
+            <button class="nav-btn active" data-tab="running">Бег</button>
+            <button class="nav-btn" data-tab="pushups">Отжимания</button>
+            <button class="nav-btn" data-tab="pullups">Подтягивания</button>
+            <button class="nav-btn" data-tab="weights">Гантели</button>
+            <button class="nav-btn" data-tab="meals">Питание</button>
+            <button class="nav-btn" data-tab="shop">Магазин</button>
+            <button class="nav-btn" data-tab="history">История</button>
+        </div>
+
+        <!-- Вкладка: Бег -->
+        <div id="running" class="tab active">
+            <div class="card">
+                <h2>Добавить пробежку</h2>
+                <form id="runningForm">
+                    <div class="form-group">
+                        <label>Дата тренировки:</label>
+                        <input type="date" id="runningDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Дистанция (км):</label>
+                        <input type="number" step="0.1" id="runningDistance" placeholder="5.2" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Время (минуты):</label>
+                        <input type="number" id="runningDuration" placeholder="30" required>
+                    </div>
+                    <button type="submit" class="btn-submit">Добавить тренировку</button>
+                </form>
+                <div class="info-box">
+                    За каждый километр вы получаете 10 очков
+                </div>
+            </div>
+        </div>
+
+        <!-- Вкладка: Отжимания -->
+        <div id="pushups" class="tab">
+            <div class="card">
+                <h2>Добавить отжимания</h2>
+                <form id="pushupsForm">
+                    <div class="form-group">
+                        <label>Дата тренировки:</label>
+                        <input type="date" id="pushupsDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Количество отжиманий:</label>
+                        <input type="number" id="pushupsCount" placeholder="50" required>
+                    </div>
+                    <button type="submit" class="btn-submit">Добавить отжимания</button>
+                </form>
+                <div class="info-box">
+                    За каждое отжимание вы получаете 1 очко
+                </div>
+            </div>
+        </div>
+
+        <!-- Вкладка: Подтягивания -->
+        <div id="pullups" class="tab">
+            <div class="card">
+                <h2>Добавить подтягивания</h2>
+                <form id="pullupsForm">
+                    <div class="form-group">
+                        <label>Дата тренировки:</label>
+                        <input type="date" id="pullupsDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Количество подтягиваний:</label>
+                        <input type="number" id="pullupsCount" placeholder="10" required>
+                    </div>
+                    <button type="submit" class="btn-submit">Добавить подтягивания</button>
+                </form>
+                <div class="info-box">
+                    За каждое подтягивание вы получаете 2 очка
+                </div>
+            </div>
+        </div>
+
+        <!-- Вкладка: Гантели -->
+        <div id="weights" class="tab">
+            <div class="card">
+                <h2>Тренировка с гантелями</h2>
+                <form id="weightsForm">
+                    <div class="form-group">
+                        <label>Дата тренировки:</label>
+                        <input type="date" id="weightsDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Вес гантели (кг):</label>
+                        <input type="number" step="0.5" id="weightKg" placeholder="10" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Количество повторений:</label>
+                        <input type="number" id="weightReps" placeholder="50" required>
+                    </div>
+                    <button type="submit" class="btn-submit">Добавить тренировку</button>
+                </form>
+                <div class="info-box">
+                    <strong>Как начисляются очки:</strong><br>
+                    • 1 очко за каждые 10 повторений с гантелями<br><br>
+                    <strong>Примеры:</strong><br>
+                    • 10 повторений → 1 очко<br>
+                    • 25 повторений → 2 очка<br>
+                    • 50 повторений → 5 очков
+                </div>
+            </div>
+        </div>
+
+        <!-- Вкладка: Питание -->
+        <div id="meals" class="tab">
+            <div class="card">
+                <h2>Дневник питания</h2>
+                <form id="mealsForm">
+                    <div class="form-group">
+                        <label>Дата:</label>
+                        <input type="date" id="mealDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Блюдо:</label>
+                        <input type="text" id="mealName" placeholder="Яблоко, Пицца" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Тип еды:</label>
+                        <div class="radio-group">
+                            <label>
+                                <input type="radio" name="foodType" value="healthy" checked>
+                                Полезная (+5 очков)
+                            </label>
+                            <label>
+                                <input type="radio" name="foodType" value="unhealthy">
+                                Вредная (-3 очка)
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-submit">Добавить запись</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Вкладка: Магазин -->
+        <div id="shop" class="tab">
+            <div class="card">
+                <h2>Магазин призов</h2>
+                <div class="user-balance">
+                    <span>Твой баланс:</span>
+                    <strong id="shopPoints">0</strong> очков
+                </div>
+                <div class="shop-items" id="shopItems"></div>
+                <div class="purchased-items">
+                    <h3>Мои покупки</h3>
+                    <div id="purchasedList"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Вкладка: История -->
+        <div id="history" class="tab">
+            <div class="card">
+                <h2>История тренировок</h2>
+                <div class="history-stats" id="historyStats"></div>
+                <div id="historyList"></div>
+                <div class="button-group">
+                    <button id="exportBtn" class="btn-secondary">Экспорт в Markdown</button>
+                    <button id="resetBtn" class="btn-danger">Сбросить все данные</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
